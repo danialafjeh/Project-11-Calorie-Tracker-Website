@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: calorieapp
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: DemoOnly
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d calorieapp"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      POSTGRES_DB: calorieapp
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: DemoOnly
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

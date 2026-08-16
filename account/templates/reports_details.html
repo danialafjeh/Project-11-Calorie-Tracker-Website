@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block content %}
+<br><br><br>
+<section id="features" class="features">
+    <div class="container">
+        <div class="row">
+            <div class="main_features p-top-100">
+                <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+                    <div class="head_title text-center">
+                        <h2>Report DCT-R#{{ report.id }} Details</h2>
+                        <h5>This report is based on your food intake and your body information that you gave us.</h5>
+                        <h5>All calorie and health-related calculations, including BMR, TDEE, and calorie balance, are
+                            estimates based on standard formulas and are provided for demonstration purposes only. Not
+                            intended for medical use.
+                        </h5>
+                    </div>
+                    <div class="scrooldown">
+                        <a href="#download"><i class="fa fa-chevron-down"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End off row -->
+    </div><!-- End off container -->
+</section><!-- End off Featured Section-->
+<!-- Calorie Tracker Section-->
+<section id="download" class="download m-top-200">
+    <br><br><br>
+    <div class="download_overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="main_download ">
+                <div class="col-12 col-lg-12 mx-auto">
+                    <div class="download_item roomy-100">
+                        <div class="card shadow-lg p-5 rounded-4">
+                            <h3 class="text-center">Report Code: DCT-R#{{ report.id }}</h3>
+                            <br>
+                            <div class="divider"></div>
+                            <br>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Generated Date</th>
+                                        <td>{{ report.created_at }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Full Name</th>
+                                        <td>{{ report.user.first_name }} {{ report.user.last_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Username</th>
+                                        <td>{{ report.user.username }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Age</th>
+                                        <td>{{ report.age }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Height</th>
+                                        <td>{{ report.height }}cm</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Weight</th>
+                                        <td>{{ report.weight }}kg</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Gender</th>
+                                        <td>{{ report.get_gender_display }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Physical Activity</th>
+                                        <td>{{ report.get_physical_activity_display }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Total Calories</th>
+                                        <td>{{ report.total_calories|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Resting Calorie Needs (BMR)</th>
+                                        <td>{{ report.bmr|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Daily Requirement (TDEE)</th>
+                                        <td>{{ report.tdee|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Calorie Balance</th>
+                                        <td>{{ report.calorie_difference|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Body Condition</th>
+                                        <td>Level : {{ report.body_condition }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            {% if report.body_condition == 'low' %}
+                            Body Condition Level Low: Your calorie intake is below your daily requirement.
+                            {% elif report.body_condition == 'normal' %}
+                            Body Condition Level Normal: Your calorie intake is within your daily requirement range.
+                            {% elif report.body_condition == 'high' %}
+                            Body Condition Level High: Your calorie intake is above your daily requirement.
+                            {% endif %}<br>
+                            <br><br>
+                            <div class="divider"></div>
+                            <br><br>
+                            <h6>Food intake involved:</h6>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Food</th>
+                                        <th scope="col">Qty</th>
+                                        <th scope="col">Unit</th>
+                                        <th scope="col">Kcal (Per 100g, Piece, 100mL)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in food_intake %}
+                                    <tr>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                        <td>{{ item.unit }}</td>
+                                        <td>{{ item.calories_per_unit }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br>
+</section>
+<!-- End Calorie Tracker Section-->
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+<br><br><br>
+<section id="features" class="features">
+    <div class="container">
+        <div class="row">
+            <div class="main_features p-top-100">
+                <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+                    <div class="head_title text-center">
+                        <h2>Profile Dashboard</h2>
+                        <h5>Here You can update your info about your body.</h5>
+                        <h5>This information will always use in Calorie Tracker to calculate your calorie reports.</h5>
+                    </div>
+                    <div class="scrooldown">
+                        <a href="#download"><i class="fa fa-chevron-down"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End off row -->
+    </div><!-- End off container -->
+</section><!-- End off Featured Section-->
+<!-- Sign In Section -->
+<section id="download" class="download m-top-200">
+    <br><br><br>
+    <div class="download_overlay"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="main_download">
+                <div class="col-md-6 offset-md-3">
+                    <div class="download_item m-top-70">
+                        <div class="card shadow-lg p-5 rounded-4">
+                            <h3 class="text-center">Update Your Body Information</h3>
+                            <div class="divider"></div>
+                            <br>
+                            <form action="#" method="POST">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    {{ form.age }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.height }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.weight }}
+                                </div>
+                                <h5>Change Your gender:</h5>
+                                <div class="mb-3">
+                                    {% for radio in form.gender %}
+                                    <div class="form-check form-check-inline">
+                                        {{ radio.tag }}
+                                        <label class="form-check-label" for="{{ radio.id_for_label }}">
+                                            {{ radio.choice_label }}
+                                        </label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <h5>Change Your physical activity:</h5>
+                                <div class="mb-3">
+                                    {% for radio in form.physical_activity %}
+                                    <div class="form-check form-check-inline">
+                                        {{ radio.tag }}
+                                        <label class="form-check-label" for="{{ radio.id_for_label }}">
+                                            {{ radio.choice_label }}
+                                        </label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <button class="btn btn-danger rounded-3" type="submit">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br><br><br>
+</section>
+{% endblock %}

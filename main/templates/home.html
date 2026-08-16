@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!--Home Sections-->
+<section id="home" class="home">
+    <div class="container">
+        <div class="row">
+            <div class="main_home">
+                <div class="col-md-6">
+                    <div class="home_text">
+                        <h1 class="text-white">Track your daily calories and Eat healthier.</h1>
+                    </div>
+                    <div class="home_btns m-top-40">
+                        <a href="{% url 'tool_page' %}"  class="btn btn-danger m-top-20">Use Our Tool Now</a>
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'profile_page' %}" class="btn btn-primary m-top-20">View Your Profile Dashboard</a>
+                        {% else %}
+                        <a href="{% url 'signup_page' %}" class="btn btn-primary m-top-20">Join Us</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="phone_one phone_attr1 text-center sm-m-top-50">
+                        <div class="attr_deg">MEAL</div>
+                        <div class="attr_rio text-uppercase">Body</div>
+                        <div class="attr_sun text-uppercase text-white">Progress</div>
+                        <div class="attr_lon text-uppercase text-white">Health</div>
+                        <img src="{% static 'assets/images/home01.jpg' %}" alt="" />
+                    </div>
+                </div>
+            </div>
+            <div class="scrooldown">
+                <a href="#features"><i class="fa fa-chevron-down"></i></a>
+            </div>
+        </div><!--End off row-->
+    </div><!--End off container -->
+</section> <!--End off Home Sections-->
+<!--Featured Section-->
+<section id="features" class="features">
+    <div class="container">
+        <div class="row">
+            <div class="main_features p-top-100">
+                <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+                    <div class="head_title text-center">
+                        <h2>Perfect Features</h2>
+                        <h5>Only necessary</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="features_item sm-m-top-30">
+                        <div class="f_item_icon">
+                            <i class="icon icon-diamond6"></i>
+                        </div>
+                        <div class="f_item_text">
+                            <h3>Easy To Use</h3>
+                            <p>A clean and user-friendly way to track your daily calories and see what your body
+                                needs.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="features_item sm-m-top-30">
+                        <div class="f_item_icon">
+                            <i class="icon icon-layers2"></i>
+                        </div>
+                        <div class="f_item_text">
+                            <h3>Full Report</h3>
+                            <p>Add the foods you've eaten and get a detailed report of your calorie intake and
+                                how is your body condition.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="features_item sm-m-top-30">
+                        <div class="f_item_icon">
+                            <i class="icon icon-business-32"></i>
+                        </div>
+                        <div class="f_item_text">
+                            <h3>Complete History</h3>
+                            <p>Your complete calorie tracking history is always available in your profile page.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End off row -->
+    </div><!-- End off container -->
+</section><!-- End off Featured Section-->
+<!--screen short section-->
+<br><br><br>
+<hr>
+<section id="screen_area" class="screen_area">
+    <div class="container">
+        <div class="row">
+            <div class="main_screen">
+                <div class="col-md-8 col-md-offset-2 col-sm-12">
+                    <div class="head_title text-center">
+                        <h2>How Our Tool Analyzes Your Body Condition ?</h2>
+                        <h5>Your daily calorie needs are calculated based on the info you
+                            provide during sign-up, including your age, gender, height, and weight. We then
+                            compare your total daily calorie intake with your estimated calorie requirement and
+                            show your body condition in 3 levels: Low, Normal, High which you can read more
+                            about
+                            it down below.
+                        </h5>
+                    </div>
+                </div>
+                <!-- Screen01-->
+                <div class="screen01 roomy-50">
+                    <div class="col-md-6">
+                        <div class="screen01_img text-center">
+                            <img src="{% static 'assets/images/home02.jpg' %}" alt="" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="screen01_content m-top-100">
+                            <div class="screen01_content_img ">
+                                <img src="{% static 'assets/images/cloud1.png' %}" alt="" />
+                            </div>
+                            <h2 class="m-top-40">1. Level: Low</h2>
+                            <p class="m-top-20">
+                                Low means your calorie intake is below your body's daily needs. You may not be
+                                consuming enough energy to support your body.
+                            </p>
+                            <ul class="list-inline m-top-50">
+                                <li class="text-center">1/3</li>
+                                <li class="text-center">Low</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!--End off Screen01-->
+                <!-- Screen02-->
+                <div class="screen02 roomy-50 m-top-100">
+                    <div class="col-md-6 col-md-push-6">
+                        <div class="screen02_img text-center">
+                            <img src="{% static 'assets/images/home03.jpg' %}" alt="" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-md-pull-6">
+                        <div class="screen02_content m-top-100">
+                            <div class="screen02_content_img ">
+                                <img src="{% static 'assets/images/sun1.png' %}" alt="" />
+                            </div>
+                            <h2 class="m-top-40">2. Level: Normal</h2>
+                            <p class="m-top-20">
+                                Normal means your calorie intake matches your estimated daily requirement,
+                                indicating a balanced intake.
+                            </p>
+                            <ul class="list-inline m-top-50">
+                                <li class="text-center">2/3</li>
+                                <li class="text-center">Normal</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!--End off Screen02-->
+                <!-- Screen03-->
+                <div class="screen03 roomy-50 m-top-100">
+                    <div class="col-md-6">
+                        <div class="screen03_img text-center">
+                            <img src="{% static 'assets/images/home04.jpg' %}" alt="" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="screen03_content m-top-100">
+                            <div class="screen03_content_img ">
+                                <img src="{% static 'assets/images/rainy1.png' %}" alt="" />
+                            </div>
+                            <h2 class="m-top-40">3. Level: High</h2>
+                            <p class="m-top-20">
+                                High means your calorie intake exceeds your estimated daily requirement.
+                                Consuming
+                                excess calories over time may lead to unwanted weight gain and other health
+                                issues.
+                            </p>
+                            <ul class="list-inline m-top-50">
+                                <li class="text-center">3/3</li>
+                                <li class="text-center">High</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!--End off Screen02-->
+            </div>
+        </div><!--End off row-->
+    </div><!--End off container-->
+</section><!--End off Screen01 Area Section -->
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block content %}
+<br><br><br>
+<section id="features" class="features">
+    <div class="container">
+        <div class="row">
+            <div class="main_features p-top-100">
+                <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+                    <div class="head_title text-center">
+                        <h2>DCT Tool</h2>
+                        <h5>Add your today's consumed foods down below and select calculate to get a full report of how
+                            is your calorie intake and
+                            what is your body condition.</h5>
+                        <h5>Easy to use and fast!</h5>
+                    </div>
+                    <div class="scrooldown">
+                        <a href="#download"><i class="fa fa-chevron-down"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End off row -->
+    </div><!-- End off container -->
+</section><!-- End off Featured Section-->
+<!-- Calorie Tracker Section-->
+<section id="download" class="download m-top-200">
+    <br><br><br>
+    <div class="download_overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="main_download ">
+                <div class="col-md-6">
+                    <div class="download_item roomy-100">
+                        <p class="text-white">
+                            <strong>Note (1) : Enter calories per 100g for foods measured in grams,
+                                per piece for individual foods and per 100mL for any drinks.</strong>
+                        </p>
+                        <p class="text-white">
+                            <strong>Note (2) : You must be signed in to your account to use our tool.</strong>
+                        </p>
+                        <div class="card shadow-lg p-3 rounded-4">
+                            <h3>Your Food Intake :</h3>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Food</th>
+                                        <th scope="col">Qty</th>
+                                        <th scope="col">Unit</th>
+                                        <th scope="col">Kcal (Per 100g, Piece, 100mL)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if food_intake %}
+                                    {% for item in food_intake %}
+                                    <tr>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                        <td>{{ item.unit }}</td>
+                                        <td>{{ item.calories_per_unit }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% else %}
+                                    <tr>
+                                        <td><p>Empty</p></td>
+                                    </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                            <a href="{% url 'tool_reset_func' %}" class="btn btn-secondary rounded-3">Reset</a>
+                            <a href="{% url 'tool_calculate_func' %}" class="btn btn-success rounded-3 m-top-10">Calculate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="download_item m-top-70">
+                        <div class="card shadow-lg p-5 rounded-4">
+                            <h3>What have you eaten today ?</h3>
+                            <form action="#" method="POST">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    {{ form.name }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.quantity }}
+                                </div>
+                                <div class="mb-3">
+                                    {% for radio in form.unit %}
+                                    <div class="form-check form-check-inline">
+                                        {{ radio.tag }}
+                                        <label class="form-check-label" for="{{ radio.id_for_label }}">
+                                            {{ radio.choice_label }}
+                                        </label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.calories_per_unit }}
+                                </div>
+                                <button class="btn btn-danger rounded-3" type="submit">Add to your food intake</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br>
+</section>
+<!-- End Calorie Tracker Section-->
+{% endblock %}

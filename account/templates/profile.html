@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block content %}
+<br><br><br>
+<section id="features" class="features">
+    <div class="container">
+        <div class="row">
+            <div class="main_features p-top-100">
+                <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+                    <div class="head_title text-center">
+                        <h2>Profile Dashboard</h2>
+                        <h5>Here you can view or edit your account information and access all of your daily calorie
+                            tracker reports with their details.
+                        </h5>
+                    </div>
+                    <div class="scrooldown">
+                        <a href="#download"><i class="fa fa-chevron-down"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End off row -->
+    </div><!-- End off container -->
+</section><!-- End off Featured Section-->
+<!-- Profile Section-->
+<section id="download" class="download m-top-200">
+    <br><br><br>
+    <div class="download_overlay"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="main_download">
+                <div class="col-md-8 offset-md-2">
+                    <div class="download_item m-top-70">
+                        {% if request.user.is_staff %}
+                        <h5><a href="{% url 'admin:index' %}" class="btn btn-danger">Website Management Panel</a></h5>
+                        {% endif %}
+                        <div class="card shadow-lg p-5 rounded-4">
+                            <h3 class="text-center">Your Information</h3>
+                            <div class="divider"></div>
+                            <br><br>
+                            <h6>(1) Account Info:</h6>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">First name</th>
+                                        <td>{{ acc_info.first_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Last name</th>
+                                        <td>{{ acc_info.last_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Username</th>
+                                        <td>{{ acc_info.username }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Password</th>
+                                        <td>Hidden</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Access level</th>
+                                        {% if request.user.is_staff %}
+                                        <td>Admin</td>
+                                        {% else %}
+                                        <td>Normal User</td>
+                                        {% endif %}
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Date joined</th>
+                                        <td>{{ acc_info.date_joined }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Last Sign In</th>
+                                        <td>{{ acc_info.last_login }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="{% url 'update_acc_info' %}" class="btn btn-info btn-sm"><strong>Edit Your Account Info</strong></a>
+                            <br><br>
+                            <div class="divider"></div>
+                            <br>
+                            <h6>(2) Body Info:</h6>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Gender</th>
+                                        <td scope="col">{{ body_info.get_gender_display }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Age</th>
+                                        <td>{{ body_info.age }}  years old</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Height</th>
+                                        <td>{{ body_info.height }} cm</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Weight</th>
+                                        <td>{{ body_info.weight }} kg</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Physical Activity</th>
+                                        <td>{{ body_info.get_physical_activity_display }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="{% url 'update_body_info' %}" class="btn btn-info btn-sm"><strong>Edit Your Body Info</strong></a>
+                        </div>
+                        <br><br>
+                        <div class="card shadow-lg p-5 rounded-4">
+                            <h3 class="text-center">Your Calorie Tracker Reports</h3>
+                            <div class="divider"></div>
+                            <br><br>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Report Code</th>
+                                        <th scope="col">Body Condition</th>
+                                        <th scope="col">Generated Date</th>
+                                        <th scope="col">Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for report in reports_info %}
+                                    <tr>
+                                        <th scope="row">DCT-R#{{ report.id }}</th>
+                                        <td>Level: {{ report.body_condition }}</td>
+                                        <td>{{ report.created_at }}</td>
+                                        <td><a href="{% url 'view_report' report.id %}" class="btn btn-info">View</a></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% if not reports_info %}
+                            Your reports history is empty.
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br><br><br>
+</section>
+<!-- End Profile Section-->
+{% endblock %}

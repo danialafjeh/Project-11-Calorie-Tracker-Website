@@ -1,0 +1,183 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Calorie Tracker</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{% static 'favicon.ico' %}">
+    <!--Google Font link-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/swiper.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/iconfont.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootsnav.css' %}">
+    <!--For Plugins external css-->
+    <!--<link rel="stylesheet" href="assets/css/plugins.css" />-->
+    <!--Theme custom css -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <!--Theme Responsive css-->
+    <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" />
+    <script src="{% static 'assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+</head>
+
+<body data-spy="scroll" data-target=".navbar-collapse">
+    <!-- Preloader -->
+    <div id="loading">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="object" id="object_one"></div>
+                <div class="object" id="object_two"></div>
+                <div class="object" id="object_three"></div>
+                <div class="object" id="object_four"></div>
+            </div>
+        </div>
+    </div><!--End off Preloader -->
+    <div class="culmn">
+        <!--Home page style-->
+        <nav class="navbar navbar-default bootsnav navbar-fixed white no-background">
+            <div class="container">
+                <!-- Start Header Navigation -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                </div>
+                <!-- End Header Navigation -->
+                <!-- navbar menu -->
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <a class="navbar-brand" href="{% url 'home_page' %}">
+                        <strong class="text-danger">WELCOME TO Danial CALORIE TRACKER</strong></a>
+                    </a>
+                    <ul class="nav navbar-nav navbar-center">
+                        <li><a href="{% url 'home_page' %}">Home</a></li>
+                        <li><a href="{% url 'tool_page' %}">Tool</a></li>
+                        <li><a href="{% url 'profile_page' %}">Profile</a></li>
+                        {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'signout_system' %}">Sign Out</a></li>
+                        {% else %}
+                        <li><a href="{% url 'signup_page' %}">Sign In / Sign Up</a></li>
+                        {% endif %}
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+                <!-- django messages -->
+                {% if messages %}
+                {% for message in messages %}
+                {% if message.tags == 'success' %}
+                <div style="
+                background:#d1e7dd;
+                color:#0f5132;
+                padding:15px 45px 15px 20px;
+                width:320px;
+                position:fixed;
+                top:80px;
+                left:20px;
+                border:1px solid #badbcc;
+                border-radius:8px;
+                text-align:left;
+                z-index:9999;
+                font-size:16px;">
+                    {{ message }}
+                    <button onclick="this.parentElement.style.display='none';" style="
+                position:absolute;
+                right:12px;
+                top:8px;
+                border:none;
+                background:none;
+                color:#0f5132;
+                font-size:22px;
+                cursor:pointer;">
+                        ×
+                    </button>
+                </div>
+                {% elif message.tags == 'error' %}
+                <div style="
+                background:#f8d7da;
+                color:#842029;
+                padding:15px 45px 15px 20px;
+                width:320px;
+                position:fixed;
+                top:80px;
+                left:20px;
+                border:1px solid #f5c2c7;
+                border-radius:8px;
+                text-align:left;
+                z-index:9999;
+                font-size:16px; ">
+                    {{ message }}
+                    <button onclick="this.parentElement.style.display='none';" style="
+                    position:absolute;
+                    right:12px;
+                    top:8px;
+                    border:none;
+                    background:none;
+                    color:#842029;
+                    font-size:22px;
+                    cursor:pointer;">
+                        ×
+                    </button>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                <!-- End django messages -->
+            </div>
+        </nav>
+        {% block content %}
+
+        {% endblock %}
+        <footer id="footer" class="footer bg-black">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="navbar navbar-default bootsnav footer-menu no-background">
+                            <div class="container">
+                                <!-- navbar menu -->
+                                <div class="collapse navbar-collapse" id="navbar-footer">
+                                    <ul class="nav navbar-nav navbar-center">
+                                        <li><a href="{% url 'home_page' %}">Home</a></li>
+                                        <li><a href="{% url 'tool_page' %}">Tool</a></li>
+                                        <li><a href="{% url 'profile_page' %}">Profile</a></li>
+                                        <li><a href="{% url 'signup_page' %}">Sign In / Sign Ip</a></li>
+                                    </ul>
+                                </div><!-- /.navbar-collapse -->
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="divider"></div>
+                    <br><br>
+                    <div class="col-md-12">
+                        <div class="main_footer text-center p-top-20 p-bottom-30">
+                            <p class="wow fadeInRight" data-wow-duration="1s">
+                                This project is made with
+                                <i class="fa fa-heart"></i>
+                                by
+                                <a target="_blank" href="https://github.com/danialafjeh">Danial Afjeh</a>
+                                2026. All Rights Reserved
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- JS includes -->
+    <script src="{% static 'assets/js/vendor/jquery-1.11.2.min.js' %}"></script>
+    <script src="{% static 'assets/js/vendor/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.magnific-popup.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.easing.1.3.js' %}"></script>
+    <script src="{% static 'assets/js/swiper.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.collapse.js' %}"></script>
+    <script src="{% static 'assets/js/bootsnav.js' %}"></script>
+    <script src="{% static 'assets/js/plugins.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>
