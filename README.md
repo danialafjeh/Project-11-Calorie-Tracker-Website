@@ -277,7 +277,7 @@ The Docker setup allows the project to be started without manually configuring t
 
 ---
 
-## 🎨 Frontend
+## Frontend
 
 The frontend was developed using:
 
