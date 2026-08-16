@@ -339,7 +339,7 @@ The templates were then:
 
 ---
 
-## 🎯 Project Goals
+## Project Goals
 
 The primary goal of this project was to build and understand a complete Django application from the backend side and then prepare it for being a containerized project using Docker.
 
