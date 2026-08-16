@@ -10,7 +10,7 @@ A full-stack calorie tracking web application built with **Django** using the **
 
 ---
 
-## 📌 Overview
+## Overview
 
 **Calorie Tracker** is a Django-based web application that allows users to create personalized calorie reports based on their physical information and the foods they consume.
 
